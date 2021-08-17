@@ -1,6 +1,3 @@
-# ถ้า USDT +2% จะ sell -> THB
-# ถ้า USDT -2% จะ เอา THB มา buy USDT เพิ่ม
-
 def ShowBTCPrice():
     from forex_python.bitcoin import BtcConverter
     b = BtcConverter()
