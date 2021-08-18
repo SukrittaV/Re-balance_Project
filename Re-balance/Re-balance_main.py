@@ -2,13 +2,13 @@ def rebalance():
     from forex_python.bitcoin import BtcConverter
     b = BtcConverter()
 
-    thb_Value = 7000  # input form API //เงินบาทใน port
-    btc_BuyPrice = 1355000  # input // ราคาที่ซื้อ BTC
-    btc_Balance = 0.004  # input // จำนวนที่ซื้อ BTC
-    btc_Value = btc_BuyPrice * btc_Balance  # มูลค่า BTC/THB ที่ซื้อมา
+    thb_Value = []  # input wallet balance form API //เงินบาทใน port
+    btc_BuyPrice = []  # input form order history // ราคาที่ซื้อ BTC
+    btc_Balance = []  # input form order history // จำนวนที่ซื้อ BTC
+    btc_Value = btc_BuyPrice * btc_Balance  # เก็บมูลค่า BTC/THB ที่ซื้อมา
     bitCoinTHB = b.get_latest_price('THB')  # input library // ราคา BTC/THB ปัจจุบัน
-    btc_LastValue = btc_Balance * bitCoinTHB  # // มูลค่า BTC ที่มี ปัจจุบัน
-    percentage = 5  # input % ใน cofig
+    btc_LastValue = btc_Balance * bitCoinTHB  #  input wallet balance // มูลค่า BTC ที่มี ปัจจุบัน
+    percentage = []  # input % ใน cofig
     print("-------------------ข้อมูลตัวแปร-----------------------")
     print('เงิน THB ในport', thb_Value)
     print('ราคาที่ซื้อ BTC :', btc_BuyPrice)
