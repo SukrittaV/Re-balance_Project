@@ -17,10 +17,10 @@ def rebalance():
     print('ราคา BTC ปัจจุบัน', bitCoinTHB)
     print('มูลค่า BTC ที่มีปัจจุบัน :', btc_LastValue)
     print("---------------------------------------------------")
+    btc_LastPricePercentage = bitCoinTHB * 100 / btc_BuyPrice - 100 # เก็บค่า BTC + - %
+    print(f'ราคา BTC {btc_LastPricePercentage} %')
 
-    if bitCoinTHB >= (btc_BuyPrice * (1+(percentage/100))):
-        print(f'ราคา BTC ปัจจุบัน {bitCoinTHB} > ราคา BTC + {percentage}% :{(btc_BuyPrice * (1+(percentage/100)))}')
-        print('ราคา BTC', (bitCoinTHB * 100 / btc_BuyPrice) - 100, '%')
+    if btc_LastPricePercentage >= percentage:
         amount = (btc_LastValue - thb_Value) / 2
         print("---------------------------------------------------")
         print(f'sell BTC {amount} THB')
@@ -28,9 +28,7 @@ def rebalance():
         print(f' ขาย BTC {amount} ')
         print(f'เหลือ BTC {btc_LastValue - amount}')
         print(f' จะมี THB {thb_Value + amount}')
-    elif bitCoinTHB <= (btc_BuyPrice * (1-(percentage/100))):
-        print(f'ราคา BTC ปัจจุบัน {bitCoinTHB} < ราคา BTC - {percentage}% :{(btc_BuyPrice * (1 - (percentage / 100)))}')
-        print('ราคา BTC', (bitCoinTHB * 100 / btc_BuyPrice) - 100, '%')
+    elif btc_LastPricePercentage <= percentage:
         amount = (thb_Value - btc_LastValue)/2
         print("---------------------------------------------------")
         print(f'buy BTC {amount} THB ')
