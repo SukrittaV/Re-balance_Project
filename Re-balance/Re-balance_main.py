@@ -3,7 +3,7 @@ def rebalance():
     b = BtcConverter()
 
     thb_Value = 7000  # input form API //เงินบาทใน port
-    btc_BuyPrice = 1855000  # input // ราคาที่ซื้อ BTC
+    btc_BuyPrice = 1355000  # input // ราคาที่ซื้อ BTC
     btc_Balance = 0.004  # input // จำนวนที่ซื้อ BTC
     btc_Value = btc_BuyPrice * btc_Balance  # มูลค่า BTC/THB ที่ซื้อมา
     bitCoinTHB = b.get_latest_price('THB')  # input library // ราคา BTC/THB ปัจจุบัน
@@ -19,7 +19,7 @@ def rebalance():
     print("---------------------------------------------------")
     btc_LastPricePercentage = bitCoinTHB * 100 / btc_BuyPrice - 100 # เก็บค่า BTC + - %
     print(f'ราคา BTC {btc_LastPricePercentage} %')
-
+    # BTC ขึ้นมากกว่า % ที่ตั้งไว้ = ขาย
     if btc_LastPricePercentage >= percentage:
         amount = (btc_LastValue - thb_Value) / 2
         print("---------------------------------------------------")
@@ -28,7 +28,9 @@ def rebalance():
         print(f' ขาย BTC {amount} ')
         print(f'เหลือ BTC {btc_LastValue - amount}')
         print(f' จะมี THB {thb_Value + amount}')
-    elif btc_LastPricePercentage <= percentage:
+
+    # BTC ลงมากกว่า % ที่ตั้งไว้ = ซื้อ
+    elif btc_LastPricePercentage <= -percentage:
         amount = (thb_Value - btc_LastValue)/2
         print("---------------------------------------------------")
         print(f'buy BTC {amount} THB ')
@@ -36,8 +38,10 @@ def rebalance():
         print(f'ไปซื้อ BTC {amount} ')
         print(f'จะได้ BTC {btc_LastValue + amount}')
         print(f'เหลือ THB {thb_Value - amount}')
+    # BTC ขยับน้อยไม่ถึง % ที่ตั้ง
     else:
-        print('ราคา BTC', (bitCoinTHB * 100 / btc_BuyPrice) - 100, '%')
-        print('wait . . .')
+        print(f'ยังไม่ถึง {percentage} % . . .')
+        print("---------------------------------------------------")
+
 
 rebalance()
